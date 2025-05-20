@@ -18,10 +18,6 @@ body {
   line-height: 1.6;
   padding-top: 50px;
 }
-body, html {
-  width: 100%;
-  overflow-x: hidden;
-}
 
 .background {
   position: fixed;
@@ -481,98 +477,3 @@ nav.hide {
   pointer-events: auto;
 }
 
-/* Базовая адаптация навигации */
-@media (max-width: 768px) {
-  nav {
-    position: fixed;
-    width: 100%;
-    height: auto;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-    background-color: rgba(0, 0, 0, 0.9);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  nav ul {
-    flex-direction: column;
-    width: 100%;
-    padding: 0;
-    margin: 0;
-  }
-
-  nav ul li {
-    width: 100%;
-    text-align: center;
-    margin: 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  nav ul li a {
-    display: block;
-    padding: 15px;
-    font-size: 18px;
-  }
-
-  header h1 {
-    font-size: 24px;
-    text-align: center;
-  }
-
-  main {
-    padding: 20px;
-  }
-
-  .accordion-header, .accordion-body {
-    font-size: 16px;
-  }
-
-  .background-overlay, .background-vignette {
-    background-size: cover;
-    background-position: center;
-  }
-}
-/* Стили навигации */
-.side-nav {
-  display: none;
-  flex-direction: column;
-  background-color: rgba(0, 0, 0, 0.95);
-  position: absolute;
-  top: 60px;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
-}
-
-.side-nav a {
-  color: white;
-  padding: 15px;
-  text-decoration: none;
-}
-
-.side-nav.open {
-  display: flex;
-  display: block;
-}
-
-.mobile-nav-toggle {
-  display: none;
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  font-size: 30px;
-  color: white;
-  z-index: 1001;
-}
-
-@media (max-width: 768px) {
-  .mobile-nav-toggle {
-    display: block;
-  }
-  img {
-  max-width: 100%;
-  height: auto;
-}
-}
