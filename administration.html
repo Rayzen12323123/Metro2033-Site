@@ -10,7 +10,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Infant:ital,wght@0,300..700;1,300..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Wix+Madefor+Text:wght@600&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="animated-background"></div>
+  <div id="background1" class="background"></div>
+  <div id="background2" class="background"></div>
+  <div class="background-overlay"></div>
+  <div class="background-vignette"></div>
   <nav>
     <ul>
       <li><a href="index.html" class="nav-link">Главная</a></li>
@@ -35,5 +38,40 @@
     <p>© 2025 Metro 2033 RP | Неофициальный проект на базе GMod</p>
   </footer>
   <script src="script.js"></script>
+  <script>
+    const images = [
+      'background/60ed6cdc9099ea777a9e8a4c58853140.jpg',
+      'background/image.png',
+      'background/image2.png',
+      'background/image3.png',
+      'background/image4.png'
+    ];
+
+    let current = 0;
+    let showingFirst = true;
+
+    const bg1 = document.getElementById('background1');
+    const bg2 = document.getElementById('background2');
+
+    // Начальная загрузка
+    bg1.style.backgroundImage = `url(${images[current]})`;
+    bg1.style.opacity = 1;
+
+    setInterval(() => {
+      current = (current + 1) % images.length;
+
+      if (showingFirst) {
+        bg2.style.backgroundImage = `url(${images[current]})`;
+        bg2.style.opacity = 1;
+        bg1.style.opacity = 0;
+      } else {
+        bg1.style.backgroundImage = `url(${images[current]})`;
+        bg1.style.opacity = 1;
+        bg2.style.opacity = 0;
+      }
+
+      showingFirst = !showingFirst;
+    }, 10000);
+  </script>
 </body>
 </html>
