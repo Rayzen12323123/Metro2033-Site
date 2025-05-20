@@ -4,6 +4,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Метро 2033: Reborn — Правила сервера</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,6 +17,13 @@
   <div class="background-overlay"></div>
   <div class="background-vignette"></div>
   <div class="mobile-nav-toggle" onclick="toggleNav()">☰</div>
+
+  <nav class="side-nav">
+    <a href="index.html">Главная</a>
+    <a href="rules.html">Правила</a>
+    <a href="about.html">О сервере</a>
+    <a href="fuction.html">Фракции</a>
+  </nav>
   <nav>
     <ul class="nav-list">
       <li><a href="index.html" class="nav-link active">Главная</a></li>
@@ -83,10 +91,10 @@
     }
   </script>
   <script>
-  function toggleNav() {
-    const nav = document.querySelector('.side-nav');
-    nav.classList.toggle('open');
-  }
-</script>
+    function toggleNav() {
+      const nav = document.querySelector('.side-nav');
+      nav.classList.toggle('open');
+    }
+  </script>
 </body>
 </html>
