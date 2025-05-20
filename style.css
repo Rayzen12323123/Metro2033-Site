@@ -1,0 +1,454 @@
+/* Общие стили */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+  color: #e0e0e0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  font-family: "Montserrat", sans-serif;
+  background-color: #1c1c1c;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 205x;
+  color: #e0e0e0;
+  line-height: 1.6;
+  padding-top: 50px;
+}
+.animated-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: -1;
+  animation: zoomEffect 30s infinite alternate ease-in-out;
+    background-image: 
+    radial-gradient(circle at center, rgba(0,0,0,0) 1%, rgba(0,0,0,0.7) 20%),
+    url('img/posterline_.png'); /* путь к фоновой картинке */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+@keyframes zoomEffect {
+  0% {
+    transform: scale(1) translate(0, 0);
+  }
+  100% {
+    transform: scale(1.05) translate(-5px, -5px);
+  }
+}
+
+h1, h2 {
+  color: rgb(190, 190, 2);
+}
+
+nav {
+  width: 240px;
+  background-color: #1a1a1a;
+  padding-top: 40px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  border-right: 2px solid #4b4a4a;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.5);
+}
+
+body {
+  margin: 0;
+  padding-left: 200px; /* должен соответствовать ширине nav */
+  box-sizing: border-box;
+}
+
+.nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-link {
+  display: block;
+  padding: 15px 25px;
+  text-decoration: none;
+  color: #fff;
+  font-size: 18px;
+  transition: background 0.3s, color 0.3s;
+  border-bottom: 1px solid #333;
+}
+
+.nav-link:hover {
+  background-color: #7c7c7c;
+  color: #fff;
+}
+.nav-link.active {
+  background-color: #7c7c7c;
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+}
+header, main, footer {
+  margin-left: 240px;
+  padding: 30px;
+}
+
+header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+  header p {
+  font-size: 1.2rem;
+  color: #ccc;
+}
+
+main p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+footer {
+  border-top: 1px solid #333;
+  font-size: 0.9rem;
+  color: #888;
+  margin-top: auto;
+}
+nav ul {
+  list-style: none; /* убирает маркеры (точки) у списка */
+  padding: 0;
+  margin: 0;
+}
+nav ul li {
+  margin: 10px 0;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: inherit;
+}
+main {
+  padding: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+  padding-top: 100px; /* Отступ сверху для фиксированного меню */
+}
+
+ul, ol {
+  padding-left: 1.5rem;
+}
+
+/* Стили для аккордеона */
+.accordion {
+  margin-top: 20px;
+}
+.accordion-item {
+  margin-bottom: 10px;
+}
+
+.accordion-header {
+  background-color: #333;
+  color: #ffffff;
+  border: none;
+  padding: 1rem;
+  text-align: left;
+  font-size: 1.2rem;
+  width: 100%;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.accordion-header:hover {
+  background-color: #444;
+}
+
+.fancy-font.highlight {
+  color: yellow; /* это делает жёлтые буквы */
+  background-color: transparent; /* убирает жёлтый фон, если он был */
+  transition: color 0.3s ease;
+}
+.accordion-content {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease, opacity 0.5s ease;
+  padding: 0 1rem;
+  background-color: rgba(46, 46, 46, 0.7);
+  border-radius: 5px;
+}
+
+.accordion-content.active {
+  opacity: 1;
+  padding: 1rem;
+}
+.accordion-content p {
+  margin-bottom: 2rem; 
+}
+.accordion-header:active {
+  background-color: #464545;
+}
+
+
+/* Для адаптивности на мобильных устройствах */
+@media (max-width: 768px) {
+  nav ul {
+    flex-direction: column;
+  }
+
+  nav ul li {
+    text-align: center;
+    width: 100%;
+  }
+
+.menu-toggle {
+  display: block;
+  cursor: pointer;
+  color: white;
+  font-size: 2rem;
+  padding: 1rem;
+  background: #333;
+  border: none;
+  width: 100%;
+}
+
+nav ul {
+  display: none;
+  width: 100%;
+  flex-direction: column;
+}
+
+nav ul.active {
+  display: flex;
+  }
+}
+.red-text {
+  color: red;
+}
+.yellow-text {
+    color: rgb(190, 190, 2);
+}
+.fancy-font{
+    font-family: "Montserratt", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 25px;
+}
+.lilac-text{
+    color:rgb(200, 162, 200);
+}
+.thin-text {
+  font-weight: 300; /* или даже 100 */
+}
+.green-text{
+    color:rgb(144, 238, 144);
+}
+.pink-text{
+    color:#800080;
+}
+.centered-text{
+    text-align: center;
+}
+.accordion-content p + p {
+  border-top: 2px solid #444;
+  padding-top: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.accordion-image {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  margin: 0.5rem auto; /* центрирует изображение */
+  border-radius: 8px;
+  display: block;     /* нужен для margin auto */
+}
+nav.hide {
+  transform: translateY(-100%);
+  transition: transform 0.3s ease-in-out;
+}
+.left-text {
+  text-align: left;
+}
+.discord-link {
+  display: inline-block;
+  background-color: #38393a; /* Цвет кнопки Discord */
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 18px;
+}
+
+.discord-link:hover {
+  background-color: #5e6e98; /* Цвет кнопки при наведении */
+}
+.text-with-image {
+  display: flex; /* Используем flex для выравнивания */
+  align-items: center; /* Выравнивание по вертикали */
+}
+
+.image {
+  width: 50px; /* Размер изображения */
+  height: auto; /* Сохраняем пропорции изображения */
+  margin-right: 10px; /* Отступ между изображением и текстом */
+}
+
+.text {
+  font-size: 1.2rem;
+  color: #3d3d3d;
+}
+.text-box {
+  background-color: rgba(97, 96, 96, 0.521); /* Черный фон с 50% прозрачностью */
+  padding: 1rem;
+  border-radius: 10px;
+  color: white;
+  max-width: 600px;
+  margin: 1rem auto;
+}
+/* Layout for 'О сервере' */
+.about-layout {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  padding: 40px;
+  flex-wrap: wrap;
+}
+
+/* Основной текст слева */
+.main-info {
+  flex: 1 1 60%;
+  color: #fff;
+  font-size: 18px;
+}
+
+/* Ссылки сбоку */
+.sidebar-links {
+  flex: 1 1 30%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.side-button {
+  display: block;
+  background-color: #1e1e1e;
+  border: 2px solid #ff6600;
+  color: #fff;
+  text-align: center;
+  padding: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.side-button:hover {
+  background-color: #ff6600;
+  transform: translateY(-2px);
+}
+.full-width-section {
+  width: 100%;
+  padding: 40px;
+  background-color: rgba(0, 0, 0, 0.5); /* можно изменить */
+  color: #fff;
+  font-size: 18px;
+  box-sizing: border-box;
+  margin-top: 40px;
+  border-top: 2px solid #505050;
+}
+.right-to-left-text {
+  direction: rtl;
+}
+.join-instructions {
+  padding: 20px;
+  border-radius: 12px;
+  margin-top: 40px;
+  color: #f0f0f0;
+  font-family: 'Cormorant Infant', serif;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.join-instructions h2 {
+  font-size: 2rem;
+  margin-bottom: 16px;
+  color: #ffa500;
+  text-align: center;
+}
+
+.join-instructions ol {
+  list-style: decimal inside;
+  line-height: 1.8;
+  font-size: 1.2rem;
+}
+
+.join-instructions code {
+  background-color: #222;
+  color: #ffa500;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+.factions-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.faction-card {
+  background-color: #1c1c1c;
+  border-radius: 12px;
+  padding: 1rem;
+  margin: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  position: relative;
+  overflow: hidden;
+  width: 300px;
+  height: 500px;
+  transition: transform 0.3s ease;
+}
+.faction-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 25px rgba(255, 165, 0, 0.3);
+}
+
+.faction-card h2 {
+  margin: 0;
+  color: #ffa600;
+  z-index: 2;
+  position: relative;
+}
+.faction-card p {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.faction-details {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: rgba(28, 28, 28, 0.95);
+  padding: 0.8rem;
+  box-sizing: border-box;
+  max-height: 1000px; /* больше чем нужно, для прокрутки */
+  opacity: 0;
+  overflow-y: auto; /* добавляет прокрутку */
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  z-index: 1;
+  color: #ddd;
+  font-size: 0.9rem;
+}
+.faction-card.active .faction-details {
+  opacity: 1;
+  pointer-events: auto;
+}
