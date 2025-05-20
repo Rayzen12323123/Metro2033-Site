@@ -18,6 +18,10 @@ body {
   line-height: 1.6;
   padding-top: 50px;
 }
+body, html {
+  width: 100%;
+  overflow-x: hidden;
+}
 
 .background {
   position: fixed;
@@ -567,4 +571,8 @@ nav.hide {
   .mobile-nav-toggle {
     display: block;
   }
+  img {
+  max-width: 100%;
+  height: auto;
+}
 }
