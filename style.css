@@ -17,10 +17,6 @@ body {
   color: #e0e0e0;
   line-height: 1.6;
   padding-top: 50px;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  font-weight: 400;
-  font-size: clamp(14px, 2vw, 18px);
 }
 
 .background {
@@ -534,44 +530,31 @@ nav.hide {
     background-position: center;
   }
 }
-
 @media (max-width: 768px) {
   .side-nav {
     display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 50px;
-    left: 0;
     width: 100%;
+    height: auto;
+    position: absolute;
+    top: 60px;
     background-color: rgba(0, 0, 0, 0.95);
     z-index: 1000;
   }
 
-  .side-nav.open {
-    display: flex;
-  }
-
   .mobile-nav-toggle {
     display: block;
+    font-size: 30px;
+    color: white;
+    padding: 15px;
     position: absolute;
     top: 10px;
     left: 10px;
-    font-size: 30px;
     z-index: 1001;
-    color: white;
-  }
-}
-
-/* На ПК — всё по-старому */
-@media (min-width: 769px) {
-  .mobile-nav-toggle {
-    display: none;
+    cursor: pointer;
   }
 
-  .side-nav {
-    display: flex !important;
-    position: fixed;
-    width: 250px;
-    height: 100%;
+  .side-nav.open {
+    display: flex;
+    flex-direction: column;
   }
 }
