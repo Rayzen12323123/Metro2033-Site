@@ -18,21 +18,45 @@ body {
   line-height: 1.6;
   padding-top: 50px;
 }
-.animated-background {
+
+.background {
   position: fixed;
   top: 0;
   left: 0;
-  height: 100vh;
-  width: 100vw;
-  z-index: -1;
-  animation: zoomEffect 30s infinite alternate ease-in-out;
-    background-image: 
-    radial-gradient(circle at center, rgba(0,0,0,0) 1%, rgba(0,0,0,0.7) 20%),
-    url('img/posterline_.png'); /* путь к фоновой картинке */
+  width: 100%;
+  height: 100%;
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  transition: opacity 2s ease-in-out;
+  z-index: -1;
+  opacity: 0;
+}
+
+#background1 {
+  z-index: -2;
+}
+
+#background2 {
+  z-index: -3;
+}
+.background-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Прозрачный чёрный */
+  z-index: -1; /* Поверх фона, но под всем остальным */
+}
+.background-vignette {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 10%, rgb(0, 0, 0) 100%);
 }
 
 @keyframes zoomEffect {
