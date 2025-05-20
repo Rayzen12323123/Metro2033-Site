@@ -550,6 +550,7 @@ nav.hide {
 
 .side-nav.open {
   display: flex;
+  display: block;
 }
 
 .mobile-nav-toggle {
