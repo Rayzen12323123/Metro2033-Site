@@ -485,16 +485,13 @@ nav.hide {
   }
 
   .background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    z-index: -1;
-  }
+  width: 100%;
+  min-height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -1;
+}
   .nav-link {
     font-size: 13px;
     padding: 6px 4px;
@@ -569,22 +566,13 @@ nav.hide {
     padding-top: 30px;
   }
   
-  .background {
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    z-index: -1;
-  }
   .background,
   .background-overlay {
     width: 100vw;
     height: 100vh;
     background-size: cover;
     background-position: center;
+    position: fixed;
     z-index: -1;
   }
 
@@ -648,5 +636,25 @@ nav.hide {
   .nav-link, nav a {
     display: inline-block;
   }
+  .background {
+    width: 100%;
+    min-height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1;
+  }
+  
 }
-/* Глобальный фон на весь сайт */
+
+@media (max-width: 768px) {
+  .background {
+  width: 100%;
+  min-height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -1;
+}
+
+}
