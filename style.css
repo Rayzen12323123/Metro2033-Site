@@ -486,17 +486,25 @@ nav.hide {
   }
     html, body {
     height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
   }
 
   .background {
+    position: fixed;
+    top: 0;
+    left: 0;
     height: 100vh;
     width: 100vw;
     background-size: cover;
     background-position: center;
+    z-index: -1;
   }
   .nav-link {
-  font-size: 14px;
-  padding: 10px 6px;
+    font-size: 13px;
+    padding: 6px 4px;
+    white-space: nowrap;
   }
 
   nav {
@@ -509,6 +517,10 @@ nav.hide {
     align-items: center;
     border-right: none;
     border-bottom: 2px solid #4b4a4a;
+  }
+  .title {
+    font-size: 22px;
+    word-break: break-word;
   }
 
   .nav-list {
@@ -542,4 +554,8 @@ nav.hide {
     margin: 0;
     padding: 0 12px;
   }
+  .content {
+  padding: 15px;
+}
+
 }
