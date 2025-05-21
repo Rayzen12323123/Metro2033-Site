@@ -488,10 +488,11 @@ nav.hide {
     position: fixed;
     top: 0;
     left: 0;
-    height: 100vh;
     width: 100vw;
+    height: 100vh;
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
     z-index: -1;
   }
   .nav-link {
@@ -638,16 +639,4 @@ nav.hide {
   .nav-link, nav a {
     display: inline-block;
   }
-}
-/* Глобальный фон на весь сайт */
-.background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  z-index: -1;
 }
