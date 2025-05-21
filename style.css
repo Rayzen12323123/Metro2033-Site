@@ -9,7 +9,7 @@ body {
   color: #e0e0e0;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
   font-family: "Montserrat", sans-serif;
-  
+  background-color: #1c1c1c;
   font-optical-sizing: auto;
   font-weight: 700;
   font-style: normal;
@@ -18,22 +18,19 @@ body {
   line-height: 1.6;
   padding-top: 50px;
 }
-  background-image: url('images/bg.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: scroll;
-  background-position: center top;
-
 
 .background {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  min-height: 100%;
+  height: 100%;
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
+  transition: opacity 2s ease-in-out;
   z-index: -1;
+  opacity: 0;
 }
-
 
 #background1 {
   z-index: -2;
@@ -62,14 +59,7 @@ body {
   background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 10%, rgb(0, 0, 0) 100%);
 }
 
-@keyframes zoomEffect {
-  0% {
-    transform: scale(1) translate(0, 0);
-  }
-  100% {
-    transform: scale(1.05) translate(-5px, -5px);
-  }
-}
+
 
 h1, h2 {
   color: rgb(190, 190, 2);
@@ -92,12 +82,6 @@ body {
   padding-left: 200px; /* должен соответствовать ширине nav */
   box-sizing: border-box;
 }
-  background-image: url('images/bg.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: scroll;
-  background-position: center top;
-
 
 .nav-list {
   list-style: none;
@@ -227,7 +211,10 @@ ul, ol {
 
 
 /* Для адаптивности на мобильных устройствах */
-
+@media (max-width: 768px) {
+  nav ul {
+    flex-direction: column;
+  }
 
   nav ul li {
     text-align: center;
@@ -483,26 +470,19 @@ nav.hide {
   pointer-events: auto;
 }
 
-
-
-/* ========== АДАПТИВНЫЕ СТИЛИ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ ========== */
-
-  background-image: url('images/bg.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: scroll;
-  background-position: center top;
-
-
+@media (max-width: 768px) {
   body {
-    
+    padding-left: 0;
+    padding-top: 80px;
+    transform: scale(0.95);
+    transform-origin: top;
   }
-  background-image: url('images/bg.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: scroll;
-  background-position: center top;
-
+    html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
 
   .background {
   width: 100%;
@@ -512,44 +492,83 @@ nav.hide {
   background-repeat: no-repeat;
   z-index: -1;
 }
-
-
   .nav-link {
     font-size: 13px;
     padding: 6px 4px;
     white-space: nowrap;
   }
 
+  nav {
+    position: relative;
+    width: 100%;
+    height: auto;
+    padding-top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-right: none;
+    border-bottom: 2px solid #4b4a4a;
+  }
   .title {
     font-size: 22px;
     word-break: break-word;
   }
 
-  .content {
-    padding: 15px;
+  .nav-list {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
   }
+
+  .nav-link {
+    display: block;
+    padding: 12px 8px;
+    font-size: 16px;
+    border-bottom: none;
+    border-right: none;
+  }
+
+  .nav-link,
+  h1, h2, h3, p, li {
+    word-wrap: break-word;
+  }
+
+  img, video {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .wrapper, .container, .main-content {
+    max-width: 100%;
+    margin: 0;
+    padding: 0 12px;
+  }
+  .content {
+  padding: 15px;
 }
 
+}
 
-/* ===== Адаптивная стилизация для мобильных устройств ===== */
-
-  background-image: url('images/bg.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: scroll;
-  background-position: center top;
-
+@media (max-width: 768px) {
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
 
   body {
-    
+    transform: scale(0.96);
+    transform-origin: top center;
     font-size: 16px;
     padding-top: 30px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: center top;
   }
-  background-image: url('images/bg.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: scroll;
-  background-position: center top;
 
 
   .background,
@@ -562,12 +581,13 @@ nav.hide {
     z-index: -1;
   }
 
+
   .nav,
   nav,
   .navigation {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: left;
     font-size: 13px;
     padding: 5px;
   }
@@ -579,11 +599,11 @@ nav.hide {
     white-space: nowrap;
   }
 
-  h1, h2, h3, .title {
+  h1, h2, h3, .title{
     font-size: 22px !important;
     text-align: center;
     word-break: break-word;
-    padding: 0 10px;
+    padding: 10px;
   }
 
   .content {
@@ -607,10 +627,13 @@ nav.hide {
     width: 100%;
   }
 }
-
-
-/* Исправление: навигация не выходит за пределы экрана */
-
+@media (max-width: 768px) {
+  .nav, nav, .navigation {
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+  }
 
   .nav::-webkit-scrollbar, nav::-webkit-scrollbar {
     display: none;
@@ -619,14 +642,19 @@ nav.hide {
   .nav-link, nav a {
     display: inline-block;
   }
+  .background {
+    width: 100%;
+    min-height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1;
+  }
+  
 }
 
-
-/* Обновлённый фон: растяжение на весь экран */
-
-
-/* Глобальный фон на весь сайт */
-.background {
+@media (max-width: 768px) {
+  .background {
   width: 100%;
   min-height: 100%;
   background-size: cover;
@@ -635,88 +663,4 @@ nav.hide {
   z-index: -1;
 }
 
-
-
-
-}
-
-
-
-
-}
-
-
-@media (max-width: 768px) {
-  html, body {
-    height: auto;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-    font-size: 16px;
-  }
-
-  body {
-    padding-left: 0 !important;
-    padding-top: 80px;
-    transform: none !important;
-    background: #1c1c1c;
-  }
-
-  .background,
-  .background-overlay,
-  .background-vignette {
-    position: absolute !important;
-    top: 0;
-    left: 0;
-    width: 100%;
-    min-height: 100%;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    z-index: -1;
-  }
-
-  nav {
-    position: relative;
-    width: 100%;
-    height: auto;
-    padding-top: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-right: none;
-    border-bottom: 2px solid #4b4a4a;
-  }
-
-  .nav-list {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .nav-link {
-    font-size: 14px;
-    padding: 10px 8px;
-    white-space: nowrap;
-    display: inline-block;
-  }
-
-  header, main, footer {
-    margin-left: 0 !important;
-    padding: 20px;
-  }
-
-  .container, .wrapper, .main-content {
-    max-width: 100%;
-    margin: 0;
-    padding: 0 12px;
-  }
-
-  img, video {
-    max-width: 100%;
-    height: auto;
-  }
 }
