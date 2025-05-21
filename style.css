@@ -618,16 +618,16 @@ nav.hide {
   .nav-link, nav a {
     display: inline-block;
   }
-}
-.background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-  transition: opacity 2s ease-in-out;
-  z-index: -1;
-  opacity: 0;
+  .background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: opacity 2s ease-in-out;
+    z-index: -1;
+    opacity: 0;
+  }
 }
