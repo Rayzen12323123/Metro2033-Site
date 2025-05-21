@@ -621,9 +621,9 @@ nav.hide {
 @media (max-width: 768px) {
   .background {
     display: none !important;
+    background: none !important;
     width: 0 !important;
     height: 0 !important;
-    background: none !important;
     position: static !important;
   }
 }
