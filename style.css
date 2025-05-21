@@ -623,5 +623,6 @@ nav.hide {
   .background {
     display: none !important;
     background: none !important;
+    background-color: #1c1c1c;
   }
 }
