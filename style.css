@@ -639,17 +639,15 @@ nav.hide {
     display: inline-block;
   }
 }
-/* Обновлённый фон: растяжение на весь экран */
-@media (max-width: 768px) {
-  .background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    z-index: -1;
-  }
+/* Глобальный фон на весь сайт */
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -1;
 }
