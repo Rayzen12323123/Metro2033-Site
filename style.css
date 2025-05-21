@@ -599,7 +599,7 @@ nav.hide {
     font-size: 22px !important;
     text-align: center;
     word-break: break-word;
-    padding: 0 10px;
+    padding: 10px;
   }
 
   .content {
