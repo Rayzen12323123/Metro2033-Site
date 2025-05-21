@@ -75,5 +75,11 @@
       showingFirst = !showingFirst;
     }, 10000);
   </script>
+    <script>
+    if (window.innerWidth <= 768) {
+      const bg = document.querySelector('.background');
+      if (bg) bg.remove(); // полностью удаляет из DOM
+    }
+  </script>
 </body>
 </html>
