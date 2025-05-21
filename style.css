@@ -1,15 +1,21 @@
-/* Общие стили */
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* =======================
+   METRO RULES – STYLE.CSS
+   One clean mobile breakpoint; PC styles intact
+   ======================= */
+
+/* ---------- Global reset ---------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+/* ---------- Base (desktop / >= 769 px) ---------- */
+html,
 body {
   color: #e0e0e0;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
   font-family: "Montserrat", sans-serif;
-  background-color: #1c1c1c;
   font-optical-sizing: auto;
   font-weight: 700;
   font-style: normal;
@@ -19,7 +25,10 @@ body {
   padding-top: 50px;
 }
 
-.background {
+/* ---------- Dynamic background layers ---------- */
+.background,
+.background-overlay,
+.background-vignette {
   position: fixed;
   top: 0;
   left: 0;
@@ -27,44 +36,30 @@ body {
   height: 100%;
   background-size: cover;
   background-position: center;
-  transition: opacity 2s ease-in-out;
+  background-repeat: no-repeat;
   z-index: -1;
+}
+
+.background {
+  transition: opacity 2s ease-in-out;
   opacity: 0;
 }
+#background1 { z-index: -2; }
+#background2 { z-index: -3; }
 
-#background1 {
-  z-index: -2;
-}
-
-#background2 {
-  z-index: -3;
-}
 .background-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5); /* Прозрачный чёрный */
-  z-index: -1; /* Поверх фона, но под всем остальным */
+  background: rgba(0, 0, 0, 0.5);  /* soft dark mask */
 }
 .background-vignette {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
   pointer-events: none;
-  z-index: -1;
-  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 10%, rgb(0, 0, 0) 100%);
+  background: radial-gradient(ellipse at center, rgba(34, 34, 34, 0) 10%, rgb(0, 0, 0) 100%);
 }
 
+/* ---------- Typography ---------- */
+h1,
+h2 { color: rgb(190, 190, 2); }
 
-
-h1, h2 {
-  color: rgb(190, 190, 2);
-}
-
+/* ---------- Layout: side nav + content ---------- */
 nav {
   width: 240px;
   background-color: #1a1a1a;
@@ -74,7 +69,7 @@ nav {
   left: 0;
   height: 100%;
   border-right: 2px solid #4b4a4a;
-  box-shadow: 2px 0 5px rgba(0,0,0,0.5);
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
 }
 
 body {
@@ -83,57 +78,11 @@ body {
   box-sizing: border-box;
 }
 
-.nav-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.nav-link {
-  display: block;
-  padding: 15px 25px;
-  text-decoration: none;
-  color: #fff;
-  font-size: 18px;
-  transition: background 0.3s, color 0.3s;
-  border-bottom: 1px solid #333;
-}
-
-.nav-link:hover {
-  background-color: #7c7c7c;
-  color: #fff;
-}
-.nav-link.active {
-  background-color: #7c7c7c;
-  color: white;
-  font-weight: bold;
-  border-radius: 8px;
-}
-header, main, footer {
+header,
+main,
+footer {
   margin-left: 240px;
   padding: 30px;
-}
-
-header h1 {
-  font-size: 2.5rem;
-  margin-bottom: 10px;
-}
-
-  header p {
-  font-size: 1.2rem;
-  color: #ccc;
-}
-
-main p {
-  font-size: 1.1rem;
-  line-height: 1.6;
-}
-
-footer {
-  border-top: 1px solid #333;
-  font-size: 0.9rem;
-  color: #888;
-  margin-top: auto;
 }
 nav ul {
   list-style: none; /* убирает маркеры (точки) у списка */
@@ -155,71 +104,25 @@ main {
   padding-top: 100px; /* Отступ сверху для фиксированного меню */
 }
 
-ul, ol {
-  padding-left: 1.5rem;
+/* ---------- Navigation links ---------- */
+.nav-list { list-style: none; margin: 0; padding: 0; }
+
+.nav-link {
+  display: block;
+  padding: 15px 25px;
+  font-size: 18px;
+  text-decoration: none;
+  color: #fff;
+  border-bottom: 1px solid #333;
+  transition: background 0.3s, color 0.3s;
 }
 
-/* Стили для аккордеона */
-.accordion {
-  margin-top: 20px;
+.nav-link:hover { background:#7c7c7c; }
+.nav-link.active {
+  background:#7c7c7c;
+  font-weight: bold;
+  border-radius: 8px;
 }
-.accordion-item {
-  margin-bottom: 10px;
-}
-
-.accordion-header {
-  background-color: #333;
-  color: #ffffff;
-  border: none;
-  padding: 1rem;
-  text-align: left;
-  font-size: 1.2rem;
-  width: 100%;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-.accordion-header:hover {
-  background-color: #444;
-}
-
-.fancy-font.highlight {
-  color: yellow; /* это делает жёлтые буквы */
-  background-color: transparent; /* убирает жёлтый фон, если он был */
-  transition: color 0.3s ease;
-}
-.accordion-content {
-  max-height: 0;
-  opacity: 0;
-  overflow: hidden;
-  transition: max-height 0.5s ease, opacity 0.5s ease;
-  padding: 0 1rem;
-  background-color: rgba(46, 46, 46, 0.7);
-  border-radius: 5px;
-}
-
-.accordion-content.active {
-  opacity: 1;
-  padding: 1rem;
-}
-.accordion-content p {
-  margin-bottom: 2rem; 
-}
-.accordion-header:active {
-  background-color: #464545;
-}
-
-
-/* Для адаптивности на мобильных устройствах */
-@media (max-width: 768px) {
-  nav ul {
-    flex-direction: column;
-  }
-
-  nav ul li {
-    text-align: center;
-    width: 100%;
-  }
 
 .menu-toggle {
   display: block;
@@ -232,50 +135,52 @@ ul, ol {
   width: 100%;
 }
 
-nav ul {
-  display: none;
-  width: 100%;
-  flex-direction: column;
-}
 
-nav ul.active {
-  display: flex;
-  }
+/* ---------- Base content ---------- */
+header h1 { font-size: 2.5rem; margin-bottom: 10px; }
+header p   { font-size: 1.2rem; color: #ccc; }
+main p     { font-size: 1.1rem; line-height: 1.6; }
+footer     { border-top: 1px solid #333; font-size: 0.9rem; color:#888; margin-top: auto; }
+
+/* UL adjustment */
+ul, ol { padding-left: 1.5rem; }
+
+/* ---------- Accordion ---------- */
+.accordion       { margin-top: 20px; }
+.accordion-item  { margin-bottom: 10px; }
+.accordion-header {
+  background:#333;
+  color: #ffffff;
+  border:none;
+  padding:1rem;
+  font-size:1.2rem;
+  text-align: left;
+  width:100%;
+  cursor:pointer;
+  border-radius:5px;
 }
-.red-text {
-  color: red;
+.accordion-header:hover { background:#444; }
+.accordion-content {
+  max-height:0;
+  opacity:0;
+  overflow:hidden;
+  transition:max-height 0.5s ease, opacity 0.5s ease;
+  background:rgba(46,46,46,0.7);
+  border-radius:5px;
+  padding:0 1rem;
 }
-.yellow-text {
-    color: rgb(190, 190, 2);
+.accordion-content.active { opacity:1; padding:1rem; }
+.accordion-content p {
+  margin-bottom: 2rem; 
 }
-.fancy-font{
-    font-family: "Montserratt", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 700;
-    font-style: normal;
-    font-size: 25px;
-}
-.lilac-text{
-    color:rgb(200, 162, 200);
-}
-.thin-text {
-  font-weight: 300; /* или даже 100 */
-}
-.green-text{
-    color:rgb(144, 238, 144);
-}
-.pink-text{
-    color:#800080;
-}
-.centered-text{
-    text-align: center;
+.accordion-header:active {
+  background-color: #464545;
 }
 .accordion-content p + p {
   border-top: 2px solid #444;
   padding-top: 0.5rem;
   margin-top: 0.5rem;
 }
-
 .accordion-image {
   width: 100%;
   max-width: 500px;
@@ -284,10 +189,40 @@ nav ul.active {
   border-radius: 8px;
   display: block;     /* нужен для margin auto */
 }
-nav.hide {
-  transform: translateY(-100%);
-  transition: transform 0.3s ease-in-out;
+
+/* ---------- Utility classes ---------- */
+.red-text    { color:red; }
+.yellow-text { color:rgb(190,190,2); }
+.lilac-text  { color:rgb(200,162,200); }
+.green-text  { color:rgb(144,238,144); }
+.pink-text   { color:#800080; }
+.centered-text{ text-align:center; }
+.thin-text   { font-weight:300; }
+.centered-text{
+    text-align: center;
 }
+
+/* Fancy font highlight */
+.fancy-font { font-family:"Montserrat",sans-serif; font-size:25px; }
+.fancy-font.highlight { color:yellow; background:transparent; transition:color .3s; }
+
+/* ---------- Cards & grids ---------- */
+.factions-container {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:1.5rem;
+  padding:2rem;
+  max-width:1200px;
+  margin:auto;
+}
+.faction-card {
+  background:#1c1c1c;
+  border-radius:12px;
+  padding:1rem;
+  box-shadow:0 2px 8px rgba(0,0,0,.4);
+  transition:transform .3s;
+}
+.faction-card:hover { transform:translateY(-5px); box-shadow:0 0 25px rgba(255,165,0,.3); }
 .left-text {
   text-align: left;
 }
@@ -300,7 +235,6 @@ nav.hide {
   border-radius: 5px;
   font-size: 18px;
 }
-
 .discord-link:hover {
   background-color: #5e6e98; /* Цвет кнопки при наведении */
 }
@@ -308,13 +242,11 @@ nav.hide {
   display: flex; /* Используем flex для выравнивания */
   align-items: center; /* Выравнивание по вертикали */
 }
-
 .image {
   width: 50px; /* Размер изображения */
   height: auto; /* Сохраняем пропорции изображения */
   margin-right: 10px; /* Отступ между изображением и текстом */
 }
-
 .text {
   font-size: 1.2rem;
   color: #3d3d3d;
@@ -336,14 +268,12 @@ nav.hide {
   padding: 40px;
   flex-wrap: wrap;
 }
-
 /* Основной текст слева */
 .main-info {
   flex: 1 1 60%;
   color: #fff;
   font-size: 18px;
 }
-
 /* Ссылки сбоку */
 .sidebar-links {
   flex: 1 1 30%;
@@ -351,7 +281,6 @@ nav.hide {
   flex-direction: column;
   gap: 15px;
 }
-
 .side-button {
   display: block;
   background-color: #1e1e1e;
@@ -363,7 +292,6 @@ nav.hide {
   text-decoration: none;
   transition: background-color 0.3s, transform 0.2s;
 }
-
 .side-button:hover {
   background-color: #ff6600;
   transform: translateY(-2px);
@@ -391,20 +319,17 @@ nav.hide {
   margin-left: auto;
   margin-right: auto;
 }
-
 .join-instructions h2 {
   font-size: 2rem;
   margin-bottom: 16px;
   color: #ffa500;
   text-align: center;
 }
-
 .join-instructions ol {
   list-style: decimal inside;
   line-height: 1.8;
   font-size: 1.2rem;
 }
-
 .join-instructions code {
   background-color: #222;
   color: #ffa500;
@@ -412,255 +337,54 @@ nav.hide {
   border-radius: 4px;
   font-size: 1rem;
 }
-.factions-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
-  padding: 2rem;
-  max-width: 1200px;
-  margin: auto;
-}
 
-.faction-card {
-  background-color: #1c1c1c;
-  border-radius: 12px;
-  padding: 1rem;
-  margin: 1rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-  position: relative;
-  overflow: hidden;
-  width: 300px;
-  height: 500px;
-  transition: transform 0.3s ease;
-}
-.faction-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 0 25px rgba(255, 165, 0, 0.3);
-}
-
-.faction-card h2 {
-  margin: 0;
-  color: #ffa600;
-  z-index: 2;
-  position: relative;
-}
-.faction-card p {
-  font-size: 1rem;
-  line-height: 1.5;
-}
-.faction-details {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  background-color: rgba(28, 28, 28, 0.95);
-  padding: 0.8rem;
-  box-sizing: border-box;
-  max-height: 1000px; /* больше чем нужно, для прокрутки */
-  opacity: 0;
-  overflow-y: auto; /* добавляет прокрутку */
-  pointer-events: none;
-  transition: opacity 0.4s ease;
-  z-index: 1;
-  color: #ddd;
-  font-size: 0.9rem;
-}
-.faction-card.active .faction-details {
-  opacity: 1;
-  pointer-events: auto;
-}
-
+/* ---------- Mobile breakpoint ---------- */
 @media (max-width: 768px) {
-  body {
-    padding-left: 0;
-    padding-top: 80px;
-    transform: scale(0.95);
-    transform-origin: top;
-  }
-    html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-  }
 
-  .background {
-  width: 100%;
-  min-height: 100%;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  z-index: -1;
-}
-  .nav-link {
-    font-size: 13px;
-    padding: 6px 4px;
-    white-space: nowrap;
-  }
+  /* Layout fixes */
+  body,
+  html { height:auto; padding:0; margin:0; overflow-x:hidden; }
+  body   { padding-left:0; padding-top:80px; font-size:16px; }
 
-  nav {
-    position: relative;
-    width: 100%;
-    height: auto;
-    padding-top: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-right: none;
-    border-bottom: 2px solid #4b4a4a;
-  }
-  .title {
-    font-size: 22px;
-    word-break: break-word;
-  }
-
-  .nav-list {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-  }
-
-  .nav-link {
-    display: block;
-    padding: 12px 8px;
-    font-size: 16px;
-    border-bottom: none;
-    border-right: none;
-  }
-
-  .nav-link,
-  h1, h2, h3, p, li {
-    word-wrap: break-word;
-  }
-
-  img, video {
-    max-width: 100%;
-    height: auto;
-  }
-
-  .wrapper, .container, .main-content {
-    max-width: 100%;
-    margin: 0;
-    padding: 0 12px;
-  }
-  .content {
-  padding: 15px;
-}
-
-}
-
-@media (max-width: 768px) {
-  html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-  }
-
-  body {
-    transform: scale(0.96);
-    transform-origin: top center;
-    font-size: 16px;
-    padding-top: 30px;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: scroll;
-    background-position: center top;
-  }
-
-
+  /* Dynamic background now scrolls with page */
   .background,
-  .background-overlay {
-    width: 100vw;
-    height: 100vh;
-    background-size: cover;
-    background-position: center;
-    position: fixed;
-    z-index: -1;
+  .background-overlay,
+  .background-vignette {
+    position:absolute !important; /* remove fixed */
+    width:100%;
+    min-height:100%;
   }
 
-
-  .nav,
-  nav,
-  .navigation {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: left;
-    font-size: 13px;
-    padding: 5px;
+  /* Nav becomes horizontal bar */
+  nav {
+    position:relative;
+    width:100%;
+    height:auto;
+    padding-top:0;
+    border-right:none;
+    border-bottom:2px solid #4b4a4a;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+  }
+  .nav-list {
+    width:100%;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    margin:0;
+  }
+  .nav-link {
+    padding:10px 12px;
+    font-size:14px;
+    white-space:nowrap;
+    border-bottom:none;
   }
 
-  .nav-link,
-  nav a {
-    padding: 6px 8px;
-    font-size: 13px;
-    white-space: nowrap;
-  }
+  /* Content margin reset */
+  header,
+  main,
+  footer { margin-left:0; padding:20px; }
 
-  h1, h2, h3, .title{
-    font-size: 22px !important;
-    text-align: center;
-    word-break: break-word;
-    padding: 10px;
-  }
-
-  .content {
-    padding: 15px;
-    font-size: 15px;
-  }
-
-  footer {
-    font-size: 12px;
-    text-align: center;
-    padding: 10px;
-  }
-
-  img {
-    max-width: 100%;
-    height: auto;
-  }
-
-  .container, .wrapper, .main {
-    padding: 10px;
-    width: 100%;
-  }
-}
-@media (max-width: 768px) {
-  .nav, nav, .navigation {
-    overflow-x: auto;
-    white-space: nowrap;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none; /* Firefox */
-  }
-
-  .nav::-webkit-scrollbar, nav::-webkit-scrollbar {
-    display: none;
-  }
-
-  .nav-link, nav a {
-    display: inline-block;
-  }
-  .background {
-    width: 100%;
-    min-height: 100%;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    z-index: -1;
-  }
-  
-}
-
-@media (max-width: 768px) {
-  .background {
-  width: 100%;
-  min-height: 100%;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  z-index: -1;
-}
-
+  img, video { max-width:100%; height:auto; }
 }
