@@ -620,7 +620,7 @@ nav.hide {
 }
 @media (max-width: 768px) {
   .background {
-    background: #1c1c1c !important;
-    background-image: none !important;
+    background: #1c1c1c ;
+    background-image: none ;
   }
 }
