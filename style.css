@@ -618,3 +618,10 @@ nav.hide {
     display: inline-block;
   }
 }
+
+@media (max-width: 768px) {
+  .background {
+    display: none !important;
+    background: none !important;
+  }
+}
