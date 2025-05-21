@@ -471,6 +471,89 @@ nav.hide {
 }
 
 @media (max-width: 768px) {
+  body {
+    padding-left: 0;
+    padding-top: 80px;
+    transform: scale(0.95);
+    transform-origin: top;
+  }
+    html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+
+  .background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+  }
+  .nav-link {
+    font-size: 13px;
+    padding: 6px 4px;
+    white-space: nowrap;
+  }
+
+  nav {
+    position: relative;
+    width: 100%;
+    height: auto;
+    padding-top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-right: none;
+    border-bottom: 2px solid #4b4a4a;
+  }
+  .title {
+    font-size: 22px;
+    word-break: break-word;
+  }
+
+  .nav-list {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .nav-link {
+    display: block;
+    padding: 12px 8px;
+    font-size: 16px;
+    border-bottom: none;
+    border-right: none;
+  }
+
+  .nav-link,
+  h1, h2, h3, p, li {
+    word-wrap: break-word;
+  }
+
+  img, video {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .wrapper, .container, .main-content {
+    max-width: 100%;
+    margin: 0;
+    padding: 0 12px;
+  }
+  .content {
+  padding: 15px;
+}
+
+}
+
+@media (max-width: 768px) {
   html, body {
     height: 100%;
     margin: 0;
@@ -538,5 +621,21 @@ nav.hide {
   .container, .wrapper, .main {
     padding: 10px;
     width: 100%;
+  }
+}
+@media (max-width: 768px) {
+  .nav, nav, .navigation {
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .nav::-webkit-scrollbar, nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav-link, nav a {
+    display: inline-block;
   }
 }
