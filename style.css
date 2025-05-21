@@ -13,7 +13,7 @@ body {
   font-optical-sizing: auto;
   font-weight: 700;
   font-style: normal;
-  font-size: 205x;
+  font-size: 20px;
   color: #e0e0e0;
   line-height: 1.6;
   padding-top: 50px;
@@ -477,18 +477,20 @@ nav.hide {
   pointer-events: auto;
 }
 
+
+
+/* ========== АДАПТИВНЫЕ СТИЛИ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ ========== */
 @media (max-width: 768px) {
-  body {
-    padding-left: 0;
-    padding-top: 80px;
-    transform: scale(0.95);
-    transform-origin: top;
-  }
-    html, body {
+  html, body {
     height: 100%;
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+  }
+
+  body {
+    transform: scale(0.95);
+    transform-origin: top;
   }
 
   .background {
@@ -501,61 +503,92 @@ nav.hide {
     background-position: center;
     z-index: -1;
   }
+
   .nav-link {
     font-size: 13px;
     padding: 6px 4px;
     white-space: nowrap;
   }
 
-  nav {
-    position: relative;
-    width: 100%;
-    height: auto;
-    padding-top: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-right: none;
-    border-bottom: 2px solid #4b4a4a;
-  }
   .title {
     font-size: 22px;
     word-break: break-word;
   }
 
-  .nav-list {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
+  .content {
+    padding: 15px;
+  }
+}
+
+
+/* ===== Адаптивная стилизация для мобильных устройств ===== */
+@media (max-width: 768px) {
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
   }
 
-  .nav-link {
-    display: block;
-    padding: 12px 8px;
+  body {
+    transform: scale(0.96);
+    transform-origin: top center;
     font-size: 16px;
-    border-bottom: none;
-    border-right: none;
+    padding-top: 30px;
+  }
+
+  .background,
+  .background-overlay {
+    width: 100vw;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    position: fixed;
+    z-index: -1;
+  }
+
+  .nav,
+  nav,
+  .navigation {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-size: 13px;
+    padding: 5px;
   }
 
   .nav-link,
-  h1, h2, h3, p, li {
-    word-wrap: break-word;
+  nav a {
+    padding: 6px 8px;
+    font-size: 13px;
+    white-space: nowrap;
   }
 
-  img, video {
+  h1, h2, h3, .title {
+    font-size: 22px !important;
+    text-align: center;
+    word-break: break-word;
+    padding: 0 10px;
+  }
+
+  .content {
+    padding: 15px;
+    font-size: 15px;
+  }
+
+  footer {
+    font-size: 12px;
+    text-align: center;
+    padding: 10px;
+  }
+
+  img {
     max-width: 100%;
     height: auto;
   }
 
-  .wrapper, .container, .main-content {
-    max-width: 100%;
-    margin: 0;
-    padding: 0 12px;
+  .container, .wrapper, .main {
+    padding: 10px;
+    width: 100%;
   }
-  .content {
-  padding: 15px;
-}
-
 }
