@@ -640,3 +640,22 @@ nav.hide {
     display: inline-block;
   }
 }
+/* Глобальный фон на весь сайт */
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -1;
+}
+
+
+@media (max-width: 768px) {
+  .nav-list {
+    flex-wrap: wrap;
+  }
+}
