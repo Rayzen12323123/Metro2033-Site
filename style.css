@@ -592,6 +592,11 @@ nav.hide {
     padding: 10px;
   }
 
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
   .container, .wrapper, .main {
     padding: 10px;
     width: 100%;
@@ -613,4 +618,12 @@ nav.hide {
     display: inline-block;
   }
 }
-
+@media (max-width: 768px) {
+  .background {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    background: none !important;
+    position: static !important;
+  }
+}
