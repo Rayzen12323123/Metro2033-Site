@@ -477,3 +477,53 @@ nav.hide {
   pointer-events: auto;
 }
 
+@media (max-width: 768px) {
+  body {
+    padding-left: 0;
+    padding-top: 80px;
+  }
+
+  nav {
+    position: relative;
+    width: 100%;
+    height: auto;
+    padding-top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-right: none;
+    border-bottom: 2px solid #4b4a4a;
+  }
+
+  .nav-list {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .nav-link {
+    display: block;
+    padding: 12px 8px;
+    font-size: 16px;
+    border-bottom: none;
+    border-right: none;
+  }
+
+  .nav-link,
+  h1, h2, h3, p, li {
+    word-wrap: break-word;
+  }
+
+  img, video {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .wrapper, .container, .main-content {
+    max-width: 100%;
+    margin: 0;
+    padding: 0 12px;
+  }
+}
