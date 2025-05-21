@@ -622,7 +622,6 @@ nav.hide {
 @media (max-width: 768px) {
   .background {
     display: none !important;
-    background: none !important;
     background-color: #1c1c1c;
   }
 }
