@@ -564,8 +564,13 @@ nav.hide {
     transform-origin: top center;
     font-size: 16px;
     padding-top: 30px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: center top;
   }
-  
+
+
   .background,
   .background-overlay {
     width: 100vw;
@@ -575,6 +580,7 @@ nav.hide {
     position: fixed;
     z-index: -1;
   }
+
 
   .nav,
   nav,
