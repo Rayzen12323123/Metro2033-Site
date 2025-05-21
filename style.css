@@ -242,7 +242,6 @@ nav ul.active {
   display: flex;
   }
 }
-
 .red-text {
   color: red;
 }
@@ -485,6 +484,17 @@ nav.hide {
     overflow-x: hidden;
   }
 
+  .background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1;
+  }
   .nav-link {
     font-size: 13px;
     padding: 6px 4px;
@@ -558,6 +568,26 @@ nav.hide {
     font-size: 16px;
     padding-top: 30px;
   }
+  
+  .background {
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1;
+  }
+  .background,
+  .background-overlay {
+    width: 100vw;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+  }
+
   .nav,
   nav,
   .navigation {
@@ -618,16 +648,5 @@ nav.hide {
   .nav-link, nav a {
     display: inline-block;
   }
-  .background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    transition: opacity 2s ease-in-out;
-    z-index: -1;
-    opacity: 0;
-  }
 }
+/* Глобальный фон на весь сайт */
