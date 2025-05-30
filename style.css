@@ -13,7 +13,7 @@
 /* ---------- Base (desktop / >= 769 px) ---------- */
 html,
 body {
-  color: #000000;
+  color: #e0e0e0;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
   font-family: "Montserrat", sans-serif;
   font-optical-sizing: auto;
@@ -344,7 +344,7 @@ ul, ol { padding-left: 1.5rem; }
   /* Layout fixes */
   body,
   html { height:auto; padding:0; margin:0; overflow-x:hidden; }
-  body   { padding-left:0; padding-top:80px; font-size:16px; }
+  body   { padding-left:0; padding-top:80px; font-size:16px; background-color: #000000;}
 
   /* Dynamic background now scrolls with page */
   .background,
