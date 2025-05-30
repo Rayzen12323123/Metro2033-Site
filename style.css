@@ -13,7 +13,7 @@
 /* ---------- Base (desktop / >= 769 px) ---------- */
 html,
 body {
-  color: #e0e0e0;
+  color: #1a1a1a;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
   font-family: "Montserrat", sans-serif;
   font-optical-sizing: auto;
