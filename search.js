@@ -17,14 +17,14 @@
     return;
   }
 
-  // debounce
+
   let timer = null;
   input.addEventListener("input", () => {
     clearTimeout(timer);
     timer = setTimeout(() => doSearch(input.value.trim()), 220);
   });
 
-  // helper: escape html
+
   function escapeHtml(s) {
     return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
   }
@@ -43,14 +43,13 @@
         if (!resp.ok) throw new Error("fetch failed " + resp.status);
         const txt = await resp.text();
 
-        // чистый текст страницы для быстрого поиска
+
         const parser = new DOMParser();
         const doc = parser.parseFromString(txt, "text/html");
         const bodyText = (doc.body && doc.body.innerText) ? doc.body.innerText.toLowerCase() : txt.toLowerCase();
 
         if (!bodyText.includes(qlc)) continue;
 
-        // пытаемся найти конкретный аккордеон, в котором есть совпадение
         const accordionSelectors = [
           ".accordion", ".accordion-item", ".acc", ".faq-item", ".accordion-block", ".collapse"
         ];
@@ -70,7 +69,7 @@
           if (matchedAccordionHeader) break;
         }
 
-        // snippet: берем кусок текста вокруг первого вхождения
+
         const origText = (doc.body && doc.body.innerText) ? doc.body.innerText : txt.replace(/<[^>]+>/g, " ");
         const lowerOrig = origText.toLowerCase();
         const idx = lowerOrig.indexOf(qlc);
@@ -79,7 +78,7 @@
         let snippet = origText.slice(start, end);
         snippet = escapeHtml(snippet);
 
-        // подсветка в snippet (вставляем <mark>)
+
         const re = new RegExp(query.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'), "gi");
         snippet = snippet.replace(re, m => `<mark>${escapeHtml(m)}</mark>`);
 
@@ -92,7 +91,7 @@
 
       } catch (err) {
         console.warn("Ошибка загрузки", p.file, err);
-        // не прерываем цикл — просто продолжаем
+
       }
     }
 
@@ -101,9 +100,9 @@
       return;
     }
 
-    // отрисуем результаты
+
     for (const item of found) {
-      // формируем ссылку: ?highlight=... &anchor=...
+
       const href = `${item.file}?highlight=${encodeURIComponent(query)}${item.anchor ? "&anchor=" + encodeURIComponent(item.anchor) : ""}`;
       const div = document.createElement("div");
       div.className = "result-item";
@@ -115,5 +114,6 @@
     }
   }
 })();
+
 
 
