@@ -7,6 +7,7 @@ const pages = [
   { file: "iventolog.html", name: "Ивентология" },
   { file: "rules-for-players.html", name: "Правила игроков" }
 ];
+
 const searchInput = document.getElementById("searchInput");
 const resultsContainer = document.getElementById("results");
 
@@ -16,9 +17,9 @@ searchInput.addEventListener("input", async () => {
 
   if (query.length < 2) return;
 
-  for (const page of pages) {
+  for (const { file, name } of pages) {
     try {
-      const response = await fetch(page);
+      const response = await fetch(file);
       const text = await response.text();
       const cleanText = text.replace(/<[^>]*>?/gm, " ").toLowerCase();
 
@@ -28,25 +29,24 @@ searchInput.addEventListener("input", async () => {
         const snippetEnd = Math.min(cleanText.length, index + 100);
         let snippet = cleanText.substring(snippetStart, snippetEnd);
 
-
+        // Подсветка найденного слова
         const regex = new RegExp(query, "gi");
         snippet = snippet.replace(regex, (match) => `<mark>${match}</mark>`);
 
         const resultDiv = document.createElement("div");
         resultDiv.classList.add("result-item");
         resultDiv.innerHTML = `
-          <a href="${page}" target="_blank">${page}</a>
+          <a href="${file}" target="_blank">${name}</a>
           <div class="snippet">...${snippet}...</div>
         `;
         resultsContainer.appendChild(resultDiv);
       }
     } catch (err) {
-      console.error(`Ошибка загрузки ${page}:`, err);
+      console.error(`Ошибка загрузки ${file}:`, err);
     }
   }
 
   if (!resultsContainer.hasChildNodes()) {
     resultsContainer.innerHTML = `<p>Ничего не найдено.</p>`;
   }
-
 });
