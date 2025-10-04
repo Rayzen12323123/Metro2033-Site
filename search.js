@@ -1,13 +1,12 @@
 const pages = [
-  "index.html",
-  "about.html",
-  "administration.html",
-  "fuction.html",
-  "general-rules.html",
-  "iventolog.html",
-  "rules-for-players.html"
+  { file: "index.html", name: "Главная страница" },
+  { file: "about.html", name: "О проекте" },
+  { file: "administration.html", name: "Администрация" },
+  { file: "fuction (1).html", name: "Фракции" },
+  { file: "general-rules.html", name: "Основные правила" },
+  { file: "iventolog.html", name: "Ивентология" },
+  { file: "rules-for-players.html", name: "Правила игроков" }
 ];
-
 const searchInput = document.getElementById("searchInput");
 const resultsContainer = document.getElementById("results");
 
@@ -49,4 +48,5 @@ searchInput.addEventListener("input", async () => {
   if (!resultsContainer.hasChildNodes()) {
     resultsContainer.innerHTML = `<p>Ничего не найдено.</p>`;
   }
+
 });
