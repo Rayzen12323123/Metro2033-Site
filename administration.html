@@ -195,8 +195,42 @@
       showingFirst = !showingFirst;
     }, 10000);
   </script>
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+  // Получаем поисковую фразу из URL
+  const params = new URLSearchParams(window.location.search);
+  const highlightWord = params.get("highlight");
+
+  if (highlightWord) {
+    // Подсветка найденных слов
+    const regex = new RegExp(highlightWord, "gi");
+
+    document.querySelectorAll(".accordion-content").forEach(content => {
+      const html = content.innerHTML;
+      if (html.toLowerCase().includes(highlightWord.toLowerCase())) {
+        // раскрываем нужный аккордеон
+        const parentAccordion = content.closest(".accordion");
+        if (parentAccordion) {
+          const accContent = parentAccordion.querySelector(".accordion-content");
+          if (accContent) accContent.style.display = "block";
+        }
+
+        // подсвечиваем совпадения
+        content.innerHTML = html.replace(regex, match => `<mark>${match}</mark>`);
+      }
+    });
+
+    // плавно скроллим к первому найденному слову
+    const mark = document.querySelector("mark");
+    if (mark) {
+      mark.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }
+});
+</script>
 </body>
 </html>
+
 
 
 
