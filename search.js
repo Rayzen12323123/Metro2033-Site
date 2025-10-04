@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
       "iventolog.html",
       "general-rules.html",
       "fuction.html",
-      "administration.html",
+      "administration.html"
     ];
 
     const results = [];
@@ -32,14 +32,14 @@ document.addEventListener("DOMContentLoaded", () => {
           .slice(snippetStart, snippetEnd)
           .replace(new RegExp(query, "gi"), match => `<mark>${match}</mark>`);
 
-        // Красивое русское название вместо file.html
+
         const titles = {
           "index.html": "Главная",
           "rules-for-players.html": "Основные правила игроков",
           "iventolog.html": "Правила Ивентологии",
           "general-rules.html": "Общие правила проекта",
           "fuction.html": "Правила Фракций",
-          "administration.html"
+          "administration.html": "Правила Администрации"
         };
 
         results.push({
@@ -73,4 +73,5 @@ document.addEventListener("DOMContentLoaded", () => {
     searchSite(query);
   });
 });
+
 
