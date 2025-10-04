@@ -228,8 +228,42 @@
       showingFirst = !showingFirst;
     }, 10000);
   </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+
+      const params = new URLSearchParams(window.location.search);
+      const highlightWord = params.get("highlight");
+    
+      if (highlightWord) {
+
+        const regex = new RegExp(highlightWord, "gi");
+    
+        document.querySelectorAll(".accordion-content").forEach(content => {
+          const html = content.innerHTML;
+          if (html.toLowerCase().includes(highlightWord.toLowerCase())) {
+
+            const parentAccordion = content.closest(".accordion");
+            if (parentAccordion) {
+              const accContent = parentAccordion.querySelector(".accordion-content");
+              if (accContent) accContent.style.display = "block";
+            }
+    
+
+            content.innerHTML = html.replace(regex, match => `<mark>${match}</mark>`);
+          }
+        });
+    
+
+        const mark = document.querySelector("mark");
+        if (mark) {
+          mark.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+      }
+    });
+  </script>
 </body>
 </html>
+
 
 
 
