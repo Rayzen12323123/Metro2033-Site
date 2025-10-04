@@ -196,40 +196,41 @@
     }, 10000);
   </script>
   <script>
-document.addEventListener("DOMContentLoaded", () => {
-  // Получаем поисковую фразу из URL
-  const params = new URLSearchParams(window.location.search);
-  const highlightWord = params.get("highlight");
+    document.addEventListener("DOMContentLoaded", () => {
 
-  if (highlightWord) {
-    // Подсветка найденных слов
-    const regex = new RegExp(highlightWord, "gi");
+      const params = new URLSearchParams(window.location.search);
+      const highlightWord = params.get("highlight");
+    
+      if (highlightWord) {
 
-    document.querySelectorAll(".accordion-content").forEach(content => {
-      const html = content.innerHTML;
-      if (html.toLowerCase().includes(highlightWord.toLowerCase())) {
-        // раскрываем нужный аккордеон
-        const parentAccordion = content.closest(".accordion");
-        if (parentAccordion) {
-          const accContent = parentAccordion.querySelector(".accordion-content");
-          if (accContent) accContent.style.display = "block";
+        const regex = new RegExp(highlightWord, "gi");
+    
+        document.querySelectorAll(".accordion-content").forEach(content => {
+          const html = content.innerHTML;
+          if (html.toLowerCase().includes(highlightWord.toLowerCase())) {
+
+            const parentAccordion = content.closest(".accordion");
+            if (parentAccordion) {
+              const accContent = parentAccordion.querySelector(".accordion-content");
+              if (accContent) accContent.style.display = "block";
+            }
+    
+
+            content.innerHTML = html.replace(regex, match => `<mark>${match}</mark>`);
+          }
+        });
+    
+
+        const mark = document.querySelector("mark");
+        if (mark) {
+          mark.scrollIntoView({ behavior: "smooth", block: "center" });
         }
-
-        // подсвечиваем совпадения
-        content.innerHTML = html.replace(regex, match => `<mark>${match}</mark>`);
       }
     });
-
-    // плавно скроллим к первому найденному слову
-    const mark = document.querySelector("mark");
-    if (mark) {
-      mark.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
-  }
-});
-</script>
+  </script>
 </body>
 </html>
+
 
 
 
