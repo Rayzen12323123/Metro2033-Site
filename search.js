@@ -1,52 +1,76 @@
-const pages = [
-  { file: "index.html", name: "Главная страница" },
-  { file: "about.html", name: "О проекте" },
-  { file: "administration.html", name: "Администрация" },
-  { file: "fuction (1).html", name: "Фракции" },
-  { file: "general-rules.html", name: "Основные правила" },
-  { file: "iventolog.html", name: "Ивентология" },
-  { file: "rules-for-players.html", name: "Правила игроков" }
-];
+document.addEventListener("DOMContentLoaded", () => {
+  const searchInput = document.querySelector("#search-input");
+  const searchResults = document.querySelector("#search-results");
 
-const searchInput = document.getElementById("searchInput");
-const resultsContainer = document.getElementById("results");
+  async function searchSite(query) {
+    searchResults.innerHTML = "";
+    if (!query.trim()) return;
 
-searchInput.addEventListener("input", async () => {
-  const query = searchInput.value.trim().toLowerCase();
-  resultsContainer.innerHTML = "";
+    const pages = [
+      "index.html",
+      "rules-for-players.html",
+      "iventolog.html",
+      "general-rules.html",
+      "fuction.html",
+      "administration.html",
+    ];
 
-  if (query.length < 2) return;
+    const results = [];
 
-  for (const { file, name } of pages) {
-    try {
-      const response = await fetch(file);
+    for (const page of pages) {
+      const response = await fetch(page);
       const text = await response.text();
-      const cleanText = text.replace(/<[^>]*>?/gm, " ").toLowerCase();
 
-      if (cleanText.includes(query)) {
-        const index = cleanText.indexOf(query);
-        const snippetStart = Math.max(0, index - 50);
-        const snippetEnd = Math.min(cleanText.length, index + 100);
-        let snippet = cleanText.substring(snippetStart, snippetEnd);
+      const lowerText = text.toLowerCase();
+      const lowerQuery = query.toLowerCase();
 
-        // Подсветка найденного слова
-        const regex = new RegExp(query, "gi");
-        snippet = snippet.replace(regex, (match) => `<mark>${match}</mark>`);
+      if (lowerText.includes(lowerQuery)) {
+        const index = lowerText.indexOf(lowerQuery);
+        const snippetStart = Math.max(0, index - 60);
+        const snippetEnd = Math.min(text.length, index + 60);
+        const snippet = text
+          .slice(snippetStart, snippetEnd)
+          .replace(new RegExp(query, "gi"), match => `<mark>${match}</mark>`);
 
-        const resultDiv = document.createElement("div");
-        resultDiv.classList.add("result-item");
-        resultDiv.innerHTML = `
-          <a href="${file}" target="_blank">${name}</a>
-          <div class="snippet">...${snippet}...</div>
-        `;
-        resultsContainer.appendChild(resultDiv);
+        // Красивое русское название вместо file.html
+        const titles = {
+          "index.html": "Главная",
+          "rules-for-players.html": "Основные правила игроков",
+          "iventolog.html": "Правила Ивентологии",
+          "general-rules.html": "Общие правила проекта",
+          "fuction.html": "Правила Фракций",
+          "administration.html"
+        };
+
+        results.push({
+          page,
+          title: titles[page] || page.replace(".html", ""),
+          snippet
+        });
       }
-    } catch (err) {
-      console.error(`Ошибка загрузки ${file}:`, err);
     }
+
+    if (results.length === 0) {
+      searchResults.innerHTML = `<p>Ничего не найдено...</p>`;
+      return;
+    }
+
+    results.forEach(res => {
+      const div = document.createElement("div");
+      div.classList.add("search-result-item");
+      div.innerHTML = `
+        <a href="${res.page}?highlight=${encodeURIComponent(query)}" class="search-link">
+          <strong>${res.title}</strong>
+        </a>
+        <p>${res.snippet}...</p>
+      `;
+      searchResults.appendChild(div);
+    });
   }
 
-  if (!resultsContainer.hasChildNodes()) {
-    resultsContainer.innerHTML = `<p>Ничего не найдено.</p>`;
-  }
+  searchInput.addEventListener("input", () => {
+    const query = searchInput.value.trim();
+    searchSite(query);
+  });
 });
+
