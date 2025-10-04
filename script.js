@@ -63,4 +63,41 @@ document.addEventListener("DOMContentLoaded", () => {
       textSpan.classList.remove("highlight"); // Убрать жёлтый цвет
     });
   });
+
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const searchInput = document.querySelector("#search-input"); // твое поле поиска
+  const resultsBox = document.querySelector("#search-results"); // контейнер с результатами
+  const accordions = document.querySelectorAll(".accordion");
+
+  // Когда кликаем на элемент результата поиска
+  resultsBox.addEventListener("click", e => {
+    const item = e.target.closest(".search-result-item");
+    if (!item) return;
+
+    const targetId = item.dataset.target; // аккордеон, к которому перейти
+    const targetAccordion = document.querySelector(`#${targetId}`);
+
+    if (targetAccordion) {
+      // Свернуть все остальные аккордеоны
+      accordions.forEach(acc => {
+        const content = acc.querySelector(".accordion-content");
+        if (content) content.style.display = "none";
+      });
+
+      // Раскрыть нужный аккордеон
+      const content = targetAccordion.querySelector(".accordion-content");
+      if (content) {
+        content.style.display = "block";
+      }
+
+      // Плавно прокрутить к нему
+      targetAccordion.scrollIntoView({ behavior: "smooth", block: "center" });
+
+      // Очистить поле поиска и результаты
+      searchInput.value = "";
+      resultsBox.innerHTML = "";
+    }
+  });
 });
