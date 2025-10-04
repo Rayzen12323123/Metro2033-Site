@@ -1,77 +1,119 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const searchInput = document.querySelector("#search-input");
-  const searchResults = document.querySelector("#search-results");
+(() => {
+  const pages = [
+    { file: "index.html", name: "Главная" },
+    { file: "about.html", name: "О проекте" },
+    { file: "administration.html", name: "Администрация" },
+    { file: "fuction.html", name: "Фракции" }, 
+    { file: "general-rules.html", name: "Основные правила" },
+    { file: "iventolog.html", name: "Ивентология" },
+    { file: "rules-for-players.html", name: "Правила игроков" }
+  ];
 
-  async function searchSite(query) {
-    searchResults.innerHTML = "";
-    if (!query.trim()) return;
+  const input = document.getElementById("searchInput") || document.querySelector("#searchInput");
+  const results = document.getElementById("results") || document.querySelector("#results");
 
-    const pages = [
-      "index.html",
-      "rules-for-players.html",
-      "iventolog.html",
-      "general-rules.html",
-      "fuction.html",
-      "administration.html"
-    ];
+  if (!input || !results) {
+    console.warn("search.js: не найден searchInput или results. Проверь id в search.html.");
+    return;
+  }
 
-    const results = [];
+  // debounce
+  let timer = null;
+  input.addEventListener("input", () => {
+    clearTimeout(timer);
+    timer = setTimeout(() => doSearch(input.value.trim()), 220);
+  });
 
-    for (const page of pages) {
-      const response = await fetch(page);
-      const text = await response.text();
+  // helper: escape html
+  function escapeHtml(s) {
+    return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+  }
 
-      const lowerText = text.toLowerCase();
-      const lowerQuery = query.toLowerCase();
+  async function doSearch(query) {
+    results.innerHTML = "";
+    if (!query || query.length < 2) return;
 
-      if (lowerText.includes(lowerQuery)) {
-        const index = lowerText.indexOf(lowerQuery);
-        const snippetStart = Math.max(0, index - 60);
-        const snippetEnd = Math.min(text.length, index + 60);
-        const snippet = text
-          .slice(snippetStart, snippetEnd)
-          .replace(new RegExp(query, "gi"), match => `<mark>${match}</mark>`);
+    const qlc = query.toLowerCase();
+    const found = [];
 
+    for (const p of pages) {
+      try {
+        const url = encodeURI(p.file);
+        const resp = await fetch(url);
+        if (!resp.ok) throw new Error("fetch failed " + resp.status);
+        const txt = await resp.text();
 
-        const titles = {
-          "index.html": "Главная",
-          "rules-for-players.html": "Основные правила игроков",
-          "iventolog.html": "Правила Ивентологии",
-          "general-rules.html": "Общие правила проекта",
-          "fuction.html": "Правила Фракций",
-          "administration.html": "Правила Администрации"
-        };
+        // чистый текст страницы для быстрого поиска
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(txt, "text/html");
+        const bodyText = (doc.body && doc.body.innerText) ? doc.body.innerText.toLowerCase() : txt.toLowerCase();
 
-        results.push({
-          page,
-          title: titles[page] || page.replace(".html", ""),
-          snippet
+        if (!bodyText.includes(qlc)) continue;
+
+        // пытаемся найти конкретный аккордеон, в котором есть совпадение
+        const accordionSelectors = [
+          ".accordion", ".accordion-item", ".acc", ".faq-item", ".accordion-block", ".collapse"
+        ];
+        let matchedAccordionHeader = null;
+
+        for (const sel of accordionSelectors) {
+          const list = doc.querySelectorAll(sel);
+          for (const acc of list) {
+            const accText = (acc.innerText || "").toLowerCase();
+            if (accText.includes(qlc)) {
+              // нашли аккордеон, попробуем взять заголовок внутри него
+              const header = acc.querySelector("button, .accordion-header, .acc-header, h1, h2, h3, .title, .heading");
+              matchedAccordionHeader = header ? header.textContent.trim() : acc.querySelector("div, p")?.textContent?.slice(0,50)?.trim();
+              break;
+            }
+          }
+          if (matchedAccordionHeader) break;
+        }
+
+        // snippet: берем кусок текста вокруг первого вхождения
+        const origText = (doc.body && doc.body.innerText) ? doc.body.innerText : txt.replace(/<[^>]+>/g, " ");
+        const lowerOrig = origText.toLowerCase();
+        const idx = lowerOrig.indexOf(qlc);
+        const start = Math.max(0, idx - 60);
+        const end = Math.min(origText.length, idx + 80);
+        let snippet = origText.slice(start, end);
+        snippet = escapeHtml(snippet);
+
+        // подсветка в snippet (вставляем <mark>)
+        const re = new RegExp(query.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'), "gi");
+        snippet = snippet.replace(re, m => `<mark>${escapeHtml(m)}</mark>`);
+
+        found.push({
+          file: p.file,
+          name: p.name || p.file.replace(".html",""),
+          snippet,
+          anchor: matchedAccordionHeader ? matchedAccordionHeader : null
         });
+
+      } catch (err) {
+        console.warn("Ошибка загрузки", p.file, err);
+        // не прерываем цикл — просто продолжаем
       }
     }
 
-    if (results.length === 0) {
-      searchResults.innerHTML = `<p>Ничего не найдено...</p>`;
+    if (found.length === 0) {
+      results.innerHTML = `<p>Ничего не найдено.</p>`;
       return;
     }
 
-    results.forEach(res => {
+    // отрисуем результаты
+    for (const item of found) {
+      // формируем ссылку: ?highlight=... &anchor=...
+      const href = `${item.file}?highlight=${encodeURIComponent(query)}${item.anchor ? "&anchor=" + encodeURIComponent(item.anchor) : ""}`;
       const div = document.createElement("div");
-      div.classList.add("search-result-item");
+      div.className = "result-item";
       div.innerHTML = `
-        <a href="${res.page}?highlight=${encodeURIComponent(query)}" class="search-link">
-          <strong>${res.title}</strong>
-        </a>
-        <p>${res.snippet}...</p>
+        <a class="result-link" href="${href}"><strong>${item.name}</strong></a>
+        <div class="snippet">...${item.snippet}...</div>
       `;
-      searchResults.appendChild(div);
-    });
+      results.appendChild(div);
+    }
   }
-
-  searchInput.addEventListener("input", () => {
-    const query = searchInput.value.trim();
-    searchSite(query);
-  });
-});
+})();
 
 
